@@ -5,7 +5,7 @@ const app = express();
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const port = 3000;
+
 
 app.set("view engine", "ejs");
 
@@ -98,6 +98,10 @@ app.get("/about", function(req, res){
   res.render("about");
 });
 
+let port = process.env.PORT;
+if (port == null || port == ""){
+	port = 3000;
+}
 
 app.listen(port, function(){
 	console.log("The server is running on port: " + port);
