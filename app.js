@@ -6,6 +6,10 @@ const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
+let port = process.env.PORT;
+if (port == null || port == ""){
+	port = 3000;
+}
 
 app.set("view engine", "ejs");
 
@@ -13,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));	
 //
 //mongodb+srv://admin-abyl:test@cluster0.kzs6m.mongodb.net/todolistDB
-mongoose.connect("mongodb://localhost:27017/todolistDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-abyl:test@cluster0.tlz8j.mongodb.net/todolistDB", {useNewUrlParser: true});
 
 const itemsSchema = { name: String };
 const Item = mongoose.model("Item", itemsSchema);
@@ -98,10 +102,6 @@ app.get("/about", function(req, res){
   res.render("about");
 });
 
-let port = process.env.PORT;
-if (port == null || port == ""){
-	port = 3000;
-}
 
 app.listen(port, function(){
 	console.log("The server is running on port: " + port);
